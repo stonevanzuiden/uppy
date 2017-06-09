@@ -23,8 +23,8 @@ module.exports = function fileCard (props) {
     meta[name] = value
   }
 
-  function renderSelectOptions(options) {
-    const opts = options || [];
+  function renderSelectOptions (options) {
+    const opts = options || []
     return opts.map((opt) => {
       return html`<option value="${opt.value}">${opt.text}</option>`
     })
