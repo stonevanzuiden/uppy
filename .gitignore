@@ -4,8 +4,8 @@ npm-debug.log
 env.sh
 node_modules
 
-dist/
-lib/
+#dist/
+#lib/
 
 website/db.json
 website/*.log
