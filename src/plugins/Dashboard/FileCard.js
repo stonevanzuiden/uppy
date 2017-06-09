@@ -23,15 +23,28 @@ module.exports = function fileCard (props) {
     meta[name] = value
   }
 
+  function renderSelectOptions(options) {
+    const opts = options || [];
+    return opts.map((opt) => {
+      return html`<option value="${opt.value}">${opt.text}</option>`
+    })
+  }
+
   function renderMetaFields (file) {
     const metaFields = props.metaFields || []
     return metaFields.map((field) => {
+      if (field.type === 'select') {
+        return html`<fieldset class="UppyDashboardFileCard-fieldset">
+          <label class="UppyDashboardFileCard-label">${field.name}</label>
+          <select name="${field.id}" onchange=${tempStoreMeta}><option disabled selected>Please select an option</option>${renderSelectOptions(field.options)}</select>
+          </fieldset>`
+      }
       return html`<fieldset class="UppyDashboardFileCard-fieldset">
         <label class="UppyDashboardFileCard-label">${field.name}</label>
         <input class="UppyDashboardFileCard-input"
                name="${field.id}"
                type="text"
-               value="${file.meta[field.id]}"
+               value="${file.meta[field.id] || ''}"
                placeholder="${field.placeholder || ''}"
                onkeyup=${tempStoreMeta} /></fieldset>`
     })
